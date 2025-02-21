@@ -1,0 +1,7 @@
+Physical_Activity,Fruits_Vegetables,Smoking,Sleep_Hours,Fast_Food,Chronic_Diseases,Headaches,Energy_Levels,Doctor_Visits,Weight_Changes,Family_Heart_Disease,Family_Genetic_Disorder,Personal_Genetic_Condition,Behavior_Changes,Sleep_Difficulties,Recommendation
+Daily,High,No,7-9,Rarely,No,Never,High,Regularly,No,No,No,No,No,No,Low Risk
+Weekly,Moderate,Occasionally,5-6,Sometimes,Yes,Occasionally,Moderate,Rarely,Yes,Yes,No,No,Occasionally,Yes,Moderate Risk
+Rarely,Low,Regularly,<5,Often,Yes,Frequently,Low,Never,Yes,Yes,Yes,Yes,Yes,Yes,High Risk
+Daily,High,No,7-9,Rarely,No,Never,High,Regularly,No,No,No,No,No,No,Low Risk
+Weekly,Moderate,Occasionally,5-6,Sometimes,Yes,Occasionally,Moderate,Rarely,Yes,Yes,No,No,Occasionally,Yes,Moderate Risk
+Rarely,Low,Regularly,<5,Often,Yes,Frequently,Low,Never,Yes,Yes,Yes,Yes,Yes,Yes,High Risk

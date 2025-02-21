@@ -1,0 +1,27 @@
+{
+    "0-12": [
+        "How many hours do you sleep daily?",
+        "Do you eat vegetables and fruits regularly?",
+        "How much time do you spend playing outdoors?"
+    ],
+    "12-20": [
+        "How often do you exercise in a week?",
+        "Do you follow a balanced diet?",
+        "How many hours do you use electronic devices daily?"
+    ],
+    "20-35": [
+        "Do you have a regular workout routine?",
+        "How do you manage stress in daily life?",
+        "How many hours do you sleep on average?"
+    ],
+    "35-50": [
+        "Do you have any chronic health issues?",
+        "How frequently do you go for health check-ups?",
+        "How do you balance work and personal life?"
+    ],
+    "50+": [
+        "Do you take any regular medications?",
+        "How often do you engage in physical activity?",
+        "Do you follow any specific dietary restrictions?"
+    ]
+}

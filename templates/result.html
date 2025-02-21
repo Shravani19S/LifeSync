@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle Assessment Result</title>
+    <style>
+        /* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #6E85B2, #B2C8DF);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centered Card */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.result-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Score Styling */
+.score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Headings */
+h2, h3 {
+    color: #2C3E50;
+}
+
+/* Recommendations List */
+.recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendations li {
+    background: #E8F5E9;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+/* No Recommendations */
+.no-recommendations {
+    font-size: 1.1rem;
+    color: #27AE60;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Back Button */
+.back-button {
+    display: inline-block;
+    text-decoration: none;
+    background: #3498DB;
+    color: white;
+    padding: 10px 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-button:hover {
+    background: #1D6FA5;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="result-card">
+            <h2>Your Lifestyle Score: <span class="score">{{ result.score }}/100</span></h2>
+            
+            <div class="assessment">
+                <h3>Overall Assessment</h3>
+                <p>{{ result.general_recommendation }}</p>
+            </div>
+
+            {% if result.specific_recommendations %}
+                <div class="recommendations">
+                    <h3>Personalized Recommendations</h3>
+                    <ul>
+                        {% for rec in result.specific_recommendations %}
+                            <li>✔ {{ rec }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p class="no-recommendations">No major improvements needed. Keep up the good work! 🎉</p>
+            {% endif %}
+
+            <a href="{{ url_for('home') }}" class="back-button">⬅ Go Back</a>
+        </div>
+    </div>
+</body>
+</html>
