@@ -1,41 +1,205 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    text-align: center;
+/* Reset styles for consistent rendering */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Body styles */
+body {
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    background-color: #f3f4f6; /* Light gray background for contrast */
+    color: #333; /* Dark text for readability */
+    line-height: 1.6;
+}
+
+/* Navigation Bar styles */
+nav {
+    background-color: #6f2c91; /* Dark purple background */
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.2s; /* Transition for hover effects */
+}
+
+nav a:hover {
+    color: #ffcc00; /* Yellow on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Container styles for main content */
 .container {
-    width: 40%;
-    margin: 5% auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0px 0px 10px gray;
-    border-radius: 8px;
+    max-width: 800px; /* Max width for large screens */
+    margin: 20px auto; /* Centering */
+    padding: 30px; /* More padding for spacious feel */
+    background-color: white; /* White background */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #6f2c91; /* Dark purple shade for headings */
+    font-size: 2em; /* Larger font size for headings */
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+label {
+    font-size: 18px; /* Slightly larger font for labels */
+    font-weight: bold;
+    margin-top: 15px;
+    color: #5b2e91; /* Medium purple for labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* More padding for comfort */
+    margin-top: 5px; /* Space above */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 16px; /* Uniform font size */
+    transition: border-color 0.3s; /* Transition for focus effect */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #6f2c91; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Radio button styles */
+input[type="radio"] {
+    margin: 8px 10px; /* Space around radio buttons */
+    cursor: pointer; /* Pointer on hover */
+}
+
+/* Button styles */
+button,
+input[type="submit"] {
+    background-color: #8e44ad; /* Purple button */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px; /* Rounded corners */
+    cursor: pointer;
+    margin-top: 15px; /* Space above buttons */
+    transition: background 0.3s, transform 0.2s; /* Transition for hover effects */
+    font-size: 16px; /* Consistent button font size */
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #732d91; /* Darker purple on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px; /* Smaller padding on mobile */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Smaller heading on mobile */
+    }
+}
+
+/* Questionnaire container styles */
+.questionnaire-container {
+    padding: 30px; /* More padding for spacious feel */
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+/* Results section styles */
+.results {
+    margin-top: 30px;
+    padding: 20px; /* More padding for results section */
+    background-color: #eafaf1; /* Light green background */
+    border: 1px solid #b2e0d4;
+    border-radius: 6px; /* Rounded corners */
+}
+
+.results h2 {
+    margin-bottom: 10px;
+    color: #6f2c91; /* Dark purple for results heading */
+    font-size: 1.8em; /* Larger font size for results heading */
+}
+
+.results p {
+    font-size: 1.2em; /* Slightly larger font for results text */
+    margin-top: 10px;
+}
+
+/* Additional styles for login and register */
+p {
+    text-align: center; /* Centered text for paragraphs */
+    margin-top: 10px; /* Space above paragraphs */
+}
+
+.btn {
+    display: inline-block;
+    background-color: hsl(282, 44%, 47%); /* Purple */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px; /* Rounded corners */
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s; /* Transition effects */
+}
+
+.btn:hover {
+    background-color: #732d91; /* Darker purple on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Challenge Page Styles */
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 h2 {
-    color: #333;
-}
-
-input, select, button {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
+    color: #2C3E50;
 }
 
 button {
-    background-color: #28a745;
+    background: #ff758c;
     color: white;
+    padding: 10px 15px;
     border: none;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #218838;
-}
-
-.error {
-    color: red;
+    background: #ff5e78;
 }

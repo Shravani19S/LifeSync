@@ -1,63 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let age = localStorage.getItem("selectedAge");
-    let gender = localStorage.getItem("selectedGender");
+    // Animate Hero Section
+    const hero = document.querySelector(".hero");
+    setTimeout(() => {
+        hero.style.transform = "scale(1.05)";
+    }, 500);
 
-    if (!age || !gender) {
-        alert("Age and gender not selected. Redirecting...");
-        window.location.href = "age-gender.html";
-        return;
-    }
+    // Dark Mode Toggle
+    const toggleBtn = document.createElement("button");
+    toggleBtn.innerText = "Toggle Dark Mode";
+    toggleBtn.classList.add("btn");
+    toggleBtn.style.margin = "10px";
+    document.body.insertBefore(toggleBtn, document.body.firstChild);
 
-    fetch("http://127.0.0.1:5000/get_questions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ age: age, gender: gender }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert("Error: " + data.error);
-            return;
-        }
+    toggleBtn.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+    });
 
-        let questionsDiv = document.getElementById("questions");
-        questionsDiv.innerHTML = "";
+    // Form Validation
+    const form = document.querySelector("form");
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            let valid = true;
+            document.querySelectorAll("input[required]").forEach(input => {
+                if (!input.value.trim()) {
+                    valid = false;
+                    input.style.border = "2px solid red";
+                } else {
+                    input.style.border = "1px solid #ccc";
+                }
+            });
 
-        data.questions.forEach((question, index) => {
-            questionsDiv.innerHTML += `
-                <div class="question">
-                    <p>${index + 1}. ${question}</p>
-                    <select id="q${index}">
-                        <option value="">Select an option</option>
-                        <option value="Always">Always</option>
-                        <option value="Often">Often</option>
-                        <option value="Sometimes">Sometimes</option>
-                        <option value="Rarely">Rarely</option>
-                        <option value="Never">Never</option>
-                    </select>
-                </div>
-            `;
+            if (!valid) {
+                e.preventDefault();
+                alert("Please fill in all required fields.");
+            }
         });
-    })
-    .catch(error => console.error("Error fetching questions:", error));
-});
-
-function submitAnswers() {
-    let responses = {};
-    let totalQuestions = document.querySelectorAll(".question").length;
-
-    for (let i = 0; i < totalQuestions; i++) {
-        let answer = document.getElementById(`q${i}`).value;
-        if (!answer) {
-            alert("Please answer all questions before submitting.");
-            return;
-        }
-        responses[`Q${i + 1}`] = answer;
     }
-
-    console.log("User Responses:", responses);
-    alert("Answers submitted successfully!");
-    window.location.href = "results.html"; // Redirect to results page
-}
+});

@@ -6,10 +6,10 @@
     <title>Lifestyle Assessment Result</title>
     <style>
         /* General Styling */
-body {
+        body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #6E85B2, #B2C8DF);
-    color: #333;
+    background: linear-gradient(135deg, #8e44ad, #6f2c91); /* Matching your theme */
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,23 +25,24 @@ body {
 }
 
 .result-card {
-    background: #fff;
+    background: #ffffff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
+    color: #333;
 }
 
 /* Score Styling */
 .score {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #4CAF50;
+    color: #ffcc00; /* Gold to highlight score */
 }
 
 /* Headings */
 h2, h3 {
-    color: #2C3E50;
+    color: #6f2c91; /* Dark Purple for consistency */
 }
 
 /* Recommendations List */
@@ -51,18 +52,18 @@ h2, h3 {
 }
 
 .recommendations li {
-    background: #E8F5E9;
-    padding: 10px;
+    background: #f3e5f5; /* Light Purple Background */
+    padding: 12px;
     margin: 8px 0;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: 500;
-    color: #2C3E50;
+    color: #6f2c91; /* Dark Purple for text */
 }
 
 /* No Recommendations */
 .no-recommendations {
-    font-size: 1.1rem;
-    color: #27AE60;
+    font-size: 1.2rem;
+    color: #ffcc00; /* Gold */
     font-weight: bold;
     margin-top: 10px;
 }
@@ -71,23 +72,34 @@ h2, h3 {
 .back-button {
     display: inline-block;
     text-decoration: none;
-    background: #3498DB;
+    background: #8e44ad; /* Purple Button */
     color: white;
-    padding: 10px 15px;
+    padding: 12px 18px;
     margin-top: 20px;
     border-radius: 8px;
     font-weight: bold;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 .back-button:hover {
-    background: #1D6FA5;
+    background: #6f2c91;
+    transform: translateY(-3px);
 }
 
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+<nav style="background-color: #732d91; padding: 10px; text-align: center;">
+    <a href="{{ url_for('index') }}" style="color: white; margin-right: 20px;">Home</a>
+    <a href="{{ url_for('profile') }}" style="color: white; margin-right: 20px;">Profile</a>
+    <a href="{{ url_for('quiz') }}" style="color: white; margin-right: 20px;">Quiz</a>
+    <a href="{{ url_for('logout') }}" style="color: white;">Logout</a>
+    <a href="{{ url_for('group_challenges') }}">👥 Group Challenges</a>
+</nav>
+</nav>
+
         <div class="result-card">
             <h2>Your Lifestyle Score: <span class="score">{{ result.score }}/100</span></h2>
             
@@ -109,8 +121,9 @@ h2, h3 {
                 <p class="no-recommendations">No major improvements needed. Keep up the good work! 🎉</p>
             {% endif %}
 
-            <a href="{{ url_for('home') }}" class="back-button">⬅ Go Back</a>
+            <a href="{{ url_for('index') }}" class="back-button">⬅ Go Back</a>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

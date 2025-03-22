@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Lifestyle Questionnaire</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('profile') }}">Profile</a>
+        
+    </nav>
+
+    <section class="hero">
+        <h1>Welcome to the Lifestyle Questionnaire</h1>
+        <p>Discover personalized health recommendations based on your lifestyle!</p>
+        <a href="{{ url_for('register') }}" class="btn">Get Started</a>
+    </section>
+
     <div class="container">
-        <h2>Welcome to the Lifestyle Questionnaire</h2>
-        <a href="{{ url_for('login') }}" class="btn">Get Started</a>
+        <h2>Why Take This Questionnaire?</h2>
+        <p>Analyze your daily habits and get expert-backed suggestions to improve your lifestyle.</p>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

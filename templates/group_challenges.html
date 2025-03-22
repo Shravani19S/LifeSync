@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Challenges</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('group_challenges') }}">Group Challenges</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+<div class="container">
+    <h2>🏆 Group Challenges</h2>
+
+    <!-- Create Group Challenge Form -->
+    <form action="{{ url_for('create_group_challenge') }}" method="POST">
+        <input type="text" name="challenge_text" placeholder="Enter a new challenge..." required>
+        <button type="submit">Create Challenge</button>
+    </form>
+
+    <!-- Show existing challenges -->
+    {% if challenges %}
+        <ul>
+            {% for challenge in challenges %}
+    <li>
+        <strong>{{ challenge.challenge_text }}</strong>
+        <br>
+
+        {% if challenge.id in joined_ids %}
+            <form action="{{ url_for('complete_group_challenge', challenge_id=challenge.id) }}" method="POST">
+                <button type="submit">✅ Complete Challenge</button>
+            </form>
+        {% else %}
+            <form action="{{ url_for('join_group_challenge', challenge_id=challenge.id) }}" method="POST">
+                <button type="submit">👥 Join Challenge</button>
+            </form>
+        {% endif %}
+    </li>
+{% endfor %}
+
+        </ul>
+    {% else %}
+        <p>No group challenges available. Create one!</p>
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

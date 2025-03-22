@@ -1,0 +1,27 @@
+<nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('quiz') }}">Quiz</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+<form action="{{ url_for('gender_age') }}" method="POST">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <label for="gender">Gender:</label>
+    <select name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+
+    <label for="age_group">Age Group:</label>
+    <select name="age_group" required>
+        <option value="0-12">0-12</option>
+        <option value="12-20">12-20</option>
+        <option value="20-35">20-35</option>
+        <option value="35-50">35-50</option>
+        <option value="50+">50+</option>
+    </select>
+
+    <button type="submit">Next</button>
+</form>
+<script src="{{ url_for('static', filename='script.js') }}"></script>

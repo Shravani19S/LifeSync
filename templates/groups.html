@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<nav>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('group_challenges') }}">Group Challenges</a>
+    <a href="{{ url_for('groups') }}">Groups</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+
+<div class="container">
+    <h2>👥 Your Groups</h2>
+
+    {% if user_groups %}
+        <ul>
+            {% for group in user_groups %}
+                <li>
+                    <p><strong>{{ group.name }}</strong></p>
+                    <a href="{{ url_for('group_details', group_id=group.id) }}">View Group</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You are not part of any groups yet. Create or join one!</p>
+    {% endif %}
+
+    <h2>Create a Group</h2>
+    <form action="{{ url_for('create_group') }}" method="POST">
+        <input type="text" name="group_name" placeholder="Group Name" required>
+        <button type="submit">Create Group</button>
+    </form>
+</div>
+
+</body>
+</html>

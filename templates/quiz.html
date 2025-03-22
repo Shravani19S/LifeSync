@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Challenges</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+<nav style="background-color: #007bff; padding: 10px; text-align: center;">
+    <a href="{{ url_for('index') }}" style="color: white; margin-right: 20px;">Home</a>
+    <a href="{{ url_for('profile') }}" style="color: white; margin-right: 20px;">Profile</a>
+    <a href="{{ url_for('quiz') }}" style="color: white; margin-right: 20px;">Quiz</a>
+    <a href="{{ url_for('logout') }}" style="color: white;">Logout</a>
+</nav>
+
+    <h1>Lifestyle Challenges</h1>
+    <div class="challenge">
+        <h2>Family Challenge</h2>
+        <p>Test how healthy your family's lifestyle is!</p>
+        
+    </div>
+    <div class="challenge">
+        <h2>Couple Challenge</h2>
+        <p>Check if you and your partner have a balanced lifestyle.</p>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
