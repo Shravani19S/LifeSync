@@ -1,104 +1,146 @@
+import numpy as np
+import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from joblib import dump, load  # For saving and loading ML models
+
+# ✅ Define all possible questions for consistent training
+all_questions = [
+    "How often do you eat vegetables?", "How many hours do you sleep?", "Do you play outdoor games?",
+    "How much water do you drink daily?", "Do you eat junk food?", "How often do you brush your teeth?",
+    "Do you watch TV or use screens before bed?", "Do you have a regular bedtime?", "Do you drink milk daily?",
+    "How often do you wash your hands before meals?", "How often do you exercise?", "Do you eat fast food?",
+    "How often do you feel stressed?", "How many hours do you spend on screens daily?", "Do you eat breakfast regularly?",
+    "How often do you consume sugary drinks?", "Do you smoke or drink alcohol?", "How often do you engage in hobbies?",
+    "Do you follow a balanced diet?", "How many hours do you work per day?", "Do you take breaks while working?",
+    "Do you drink coffee?", "Do you have a regular workout routine?", "Do you have a work-life balance?",
+    "How often do you socialize?", "Do you go for regular health checkups?", "Do you have digestive issues?",
+    "Do you spend time with family and friends?", "How often do you meditate or relax?",
+    "How often do you feel lonely?", "Do you maintain a healthy weight?"
+]
+
+# ✅ Sample dataset (Train ML Model with All Features)
+data = [
+    {q: "Sometimes" for q in all_questions} | {"Lifestyle Score": 70},
+    {q: "Always" for q in all_questions} | {"Lifestyle Score": 90},
+    {q: "Rarely" for q in all_questions} | {"Lifestyle Score": 40},
+    {q: "Often" for q in all_questions} | {"Lifestyle Score": 60},
+]
+
+# ✅ Convert dataset to DataFrame
+df = pd.DataFrame(data)
+
+# ✅ Separate Features (X) and Target Variable (y)
+X = df.drop(columns=["Lifestyle Score"])
+y = df["Lifestyle Score"]
+
+# ✅ One-Hot Encoding for categorical features
+encoder = OneHotEncoder(handle_unknown="ignore")  # ✅ Ignore unknown categories
+X_encoded = encoder.fit_transform(X).toarray()
+
+# ✅ Split data into training & testing
+X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
+
+# ✅ Train Decision Tree Model
+model = DecisionTreeRegressor()
+model.fit(X_train, y_train)
+
+# ✅ Save trained model & encoder
+dump(model, 'lifestyle_model.joblib')
+dump(encoder, 'encoder.joblib')
+
+print("✅ Model trained and saved!")
+
+
+# ✅ Predict Lifestyle Score Function
 def calculate_lifestyle_score(responses):
     """
-    Calculates a lifestyle score based on user responses.
-    Each option has a weight (higher for healthier choices).
+    Predicts the lifestyle score based on user responses using ML.
     """
-    score = 0
-    total_questions = len(responses)
+    model = load('lifestyle_model.joblib')
+    encoder = load('encoder.joblib')
 
-    # Define scoring system for responses (higher score for healthier habits)
-    scoring = {
-        "Always": 10, "Daily": 10, "Often": 7, "3-5 times a week": 7,
-        "Sometimes": 5, "Few times a week": 5, "Neutral": 5,  
-        "Rarely": 2, "1-2 times a week": 2, "Never": 0,
-        "Less than 1L": 2, "1-2L": 5, "2-3L": 7, "More than 3L": 10,
-        "Less than 6": 2, "6-8": 7, "8-10": 10, "More than 10": 10,
-        "Less than 5": 2, "5-7": 5, "7-9": 7, "More than 9": 10,
-        "More than 6": 0, "4-6": 2, "2-4": 5, "Less than 2": 10,
-        "More than 8": 2, "6-8": 5, "4-6": 7, "Less than 4": 10,
-        "More than 3 cups": 2, "2-3 cups": 5, "1 cup": 7, "Rarely": 10,
-        "High sugar intake": 2, "Moderate sugar intake": 5, "Low sugar intake": 10,
-        "Poor work-life balance": 2, "Moderate balance": 5, "Good balance": 10,
-        "Frequent stress": 2, "Occasional stress": 5, "Rarely stressed": 10
-    }
+    # ✅ Fill missing responses with default "Sometimes"
+    complete_responses = {q: responses.get(q, "Sometimes") for q in all_questions}
 
-    # Calculate total score
-    for response in responses.values():
-        score += scoring.get(response, 5)  # Default score is 5 if not found
+    # Convert user responses into DataFrame
+    df = pd.DataFrame([complete_responses])
+    X_encoded = encoder.transform(df).toarray()
 
-    # Normalize the score to a scale of 100
-    max_possible_score = total_questions * 10  # Max score per question is 10
-    lifestyle_score = (score / max_possible_score) * 100 if total_questions > 0 else 0
+    # Predict lifestyle score using ML model
+    score = model.predict(X_encoded)[0]
+    
+    return round(score)
 
-    return round(lifestyle_score)
 
+# ✅ AI-Based Recommendation System
 def get_recommendations(responses):
     """
-    Generates recommendations based on the user's lifestyle score and responses.
+    Generates AI-driven recommendations based on ML-predicted lifestyle score.
     """
     score = calculate_lifestyle_score(responses)
 
     general_recommendation = ""
-    recommendations_list = []  # Stores all recommendations correctly
+    recommendations_list = []
 
-    # General lifestyle score-based feedback
+    # ✅ AI-Based General Recommendations
     if score >= 80:
-        general_recommendation = "Excellent lifestyle! Keep maintaining your healthy habits."
+        general_recommendation = "🏆 Excellent lifestyle! Keep up your healthy habits!"
     elif score >= 60:
-        general_recommendation = "Good lifestyle, but consider adding more healthy routines like exercise and a balanced diet."
+        general_recommendation = "✅ Good lifestyle! Consider adding more healthy routines."
     elif score >= 40:
-        general_recommendation = "Moderate lifestyle. Try to improve your habits by eating healthy and staying active."
+        general_recommendation = "⚠️ Moderate lifestyle. Try improving your diet and activity level."
     else:
-        general_recommendation = "Unhealthy lifestyle. Consider making significant changes such as exercising daily and eating nutritious food."
+        general_recommendation = "🚨 Unhealthy lifestyle! Consider significant changes to improve your well-being."
 
-    # DEBUG: Print responses to check keys
-    print("\n🔍 DEBUG: User Responses:", responses)
-
-    # Generate specific recommendations
+    # ✅ AI-Based Specific Recommendations
     for question, answer in responses.items():
-        question_lower = question.lower()
+        if "sleep" in question.lower() and answer in ["Less than 6", "More than 10"]:
+            recommendations_list.append("💤 Aim for 7-9 hours of sleep to improve energy levels.")
 
-        if "sleep" in question_lower and answer in ["Less than 6", "More than 10"]:
-            recommendations_list.append("Try to get 7-9 hours of sleep for better health.")
+        if "water" in question.lower() and answer in ["Less than 1L", "1-2L"]:
+            recommendations_list.append("💧 Increase your water intake to at least 2-3 liters daily.")
 
-        if "water" in question_lower and answer in ["Less than 1L", "1-2L"]:
-            recommendations_list.append("Increase your water intake to at least 2-3 liters daily.")
+        if "exercise" in question.lower() and answer in ["Never", "Rarely"]:
+            recommendations_list.append("🏃 Incorporate at least 30 minutes of physical activity daily.")
 
-        if "exercise" in question_lower and answer in ["Never", "Rarely"]:
-            recommendations_list.append("Incorporate regular physical activity, at least 30 minutes a day.")
+        if ("fruits" in question.lower() or "vegetables" in question.lower()) and answer in ["Rarely", "Never"]:
+            recommendations_list.append("🍎 Increase your intake of fresh fruits and vegetables.")
 
-        if "fruits" in question_lower or "vegetables" in question_lower and answer in ["Rarely", "Never"]:
-            recommendations_list.append("Increase your intake of fresh vegetables and fruits for a balanced diet.")
+        if "screen time" in question.lower() and answer == "More than 6":
+            recommendations_list.append("📵 Reduce screen time and take breaks to avoid eye strain.")
 
-        if "screen time" in question_lower and answer == "More than 6":
-            recommendations_list.append("Reduce screen time and take regular breaks to avoid eye strain and mental fatigue.")
+        if "caffeine" in question.lower() and answer == "More than 3 cups":
+            recommendations_list.append("☕ Limit caffeine intake to avoid sleep disruption.")
 
-        if "caffeine" in question_lower and answer == "More than 3 cups":
-            recommendations_list.append("Limit caffeine intake to avoid sleep disruption and anxiety.")
+        if "sugar" in question.lower() and answer == "High sugar intake":
+            recommendations_list.append("🚫 Reduce sugar intake to lower the risk of diabetes.")
 
-        if "sugar" in question_lower and answer == "High sugar intake":
-            recommendations_list.append("Reduce sugar intake to lower the risk of diabetes and weight gain.")
+        if "work-life balance" in question.lower() and answer == "Poor work-life balance":
+            recommendations_list.append("⚖️ Set boundaries to improve work-life balance.")
 
-        if "work-life balance" in question_lower and answer == "Poor work-life balance":
-            recommendations_list.append("Ensure a better balance by setting boundaries and taking breaks.")
-
-        if "stress" in question_lower and answer == "Frequent stress":
-            recommendations_list.append("Try relaxation techniques like meditation, deep breathing, or yoga.")
-
-    # Print only recommendations
-    print("\n📌 **Personalized Recommendations:**")
-
-    if general_recommendation:
-        print(f"👉 {general_recommendation}\n")
-
-    if recommendations_list:
-        for rec in recommendations_list:
-            print(f"✅ {rec}")
-    else:
-        print("✅ Keep up the good work! No major improvements needed.")
+        if "stress" in question.lower() and answer == "Frequent stress":
+            recommendations_list.append("🧘 Try relaxation techniques like meditation or deep breathing.")
 
     return {
         "score": score,
         "general_recommendation": general_recommendation,
         "specific_recommendations": recommendations_list
     }
+
+
+# ✅ Example Usage
+if __name__ == "__main__":
+    user_responses = {
+        "How often do you eat vegetables?": "Sometimes",
+        "How many hours do you sleep?": "7-9",
+    }
+
+    result = get_recommendations(user_responses)
+
+    print("🔹 Lifestyle Score:", result["score"])
+    print("🔹 General Recommendation:", result["general_recommendation"])
+    print("🔹 Specific Recommendations:")
+    for rec in result["specific_recommendations"]:
+        print(f"✅ {rec}")
