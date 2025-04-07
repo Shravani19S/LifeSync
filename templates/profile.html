@@ -5,57 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <body>
+    <nav>
+        <div class="navbar-brand">LifeSync</div>
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('groups') }}">Groups</a>
+            <a href="{{ url_for('group_challenges') }}">👥 Group Challenges</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2>Your Test History</h2>
 
-<!-- Navigation Bar -->
-<nav>
-    <a href="{{ url_for('index') }}">Home</a>
-    <a href="{{ url_for('profile') }}">Profile</a>
-    <a href="{{ url_for('quiz') }}">Quiz</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
-    <a href="{{ url_for('groups') }}">Groups</a>
-    <a href="{{ url_for('group_challenges') }}">👥 Group Challenges</a>
-</nav>
-<div class="container">
-    <h2>Your Test History</h2>
+        {% if test_history %}
+            <ul>
+                {% for test in test_history %}
+                    <li>
+                        <p><strong>Score:</strong> {{ test.score }}</p>
+                        <p><strong>Date Taken:</strong> {{ test.date_taken }}</p>
+                        <h3>Recommendations:</h3>
+                        <ul>
+                            {% for recommendation in test.recommendations.split("\n") %}
+                                <li>{{ recommendation }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <hr>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No test history available. Take a test to see your results.</p>
+        {% endif %}
 
-    {% if test_history %}
+        <h2>🎯 Your Challenges</h2>
+        <a href="{{ url_for('challenges') }}" class="btn">View Challenges</a>
+
+        <h2>🏆 Completed Group Challenges</h2>
         <ul>
-            {% for test in test_history %}
+            {% for participation in completed_group_challenges %}
                 <li>
-                    <p><strong>Score:</strong> {{ test.score }}</p>
-                    <p><strong>Date Taken:</strong> {{ test.date_taken }}</p>
-                    <h3>Recommendations:</h3>
-                    <ul>
-                        {% for recommendation in test.recommendations.split("\n") %}
-                            <li>{{ recommendation }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ participation.group_challenge.challenge_text }} ✅ Completed!
                 </li>
-                <hr>
             {% endfor %}
         </ul>
-    {% else %}
-        <p>No test history available. Take a test to see your results.</p>
-    {% endif %}
+    </div>
 
-    <h2>🎯 Your Challenges</h2>
-    <a href="{{ url_for('challenges') }}" class="btn">View Challenges</a>
-    
-    <h2>🏆 Completed Group Challenges</h2>
-<ul>
-    {% for participation in completed_group_challenges %}
-        <li>
-            {{ participation.group_challenge.challenge_text }} ✅ Completed!
-        </li>
-    {% endfor %}
-</ul>
-
-    
-</div>
-
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

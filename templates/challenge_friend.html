@@ -1,5 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge a Friend</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='challenge_friend.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="navbar-brand">LifeSync</div>
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('group_challenges') }}">👥 Group Challenges</a>
+        </div>
+    </nav>
 <form method="POST">
     <label for="goal">Enter your lifestyle goal (e.g., "Complete 5 daily habits"):</label>
     <input type="text" name="goal" id="goal" required>
     <button type="submit">Challenge Friend</button>
 </form>
+
+</body>
+</html>
+

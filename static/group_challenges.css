@@ -1,0 +1,64 @@
+/* Main Container */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* Forms */
+form.challenge-form {
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    padding: 10px 18px;
+    background-color: #0e5e4d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #138d75;
+}
+
+/* Challenge List */
+ul.challenge-list {
+    list-style: none;
+    padding: 0;
+}
+
+.challenge-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.challenge-item form {
+    margin-top: 10px;
+}
+
+.complete-btn {
+    background-color: #27ae60;
+}
+
+.join-btn {
+    background-color: #2980b9;
+}

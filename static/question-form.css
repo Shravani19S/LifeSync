@@ -1,0 +1,56 @@
+.questionnaire-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.questionnaire-container h2 {
+    text-align: center;
+    color: #5e2a84;
+    margin-bottom: 30px;
+}
+
+/* Each question with its options */
+.option-group {
+    margin-bottom: 25px;
+}
+
+/* Question text */
+.option-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #4b2c67;
+}
+
+/* Option styling */
+.option {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+}
+
+.option input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #7f3fbf;
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 30px auto 0;
+    background-color: #7f3fbf;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #692bbf;
+}

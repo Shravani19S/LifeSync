@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Register</title>
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
 </head>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('register') }}">Register</a>
-        <a href="{{ url_for('profile') }}">Profile</a>
+        <div class="navbar-brand">LifeSync</div>
+        <div class="navbar-links">
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+        </div>
     </nav>
 
     <div class="container">

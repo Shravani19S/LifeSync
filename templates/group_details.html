@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ group.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='group_details.css') }}">
 </head>
 <body>
 
-<nav>
-    <a href="{{ url_for('index') }}">Home</a>
-    <a href="{{ url_for('profile') }}">Profile</a>
-    <a href="{{ url_for('group_challenges') }}">Group Challenges</a>
-    <a href="{{ url_for('groups') }}">Groups</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
-</nav>
+    <nav>
+        <div class="navbar-brand">LifeSync</div>
+        <div class="navbar-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('group_challenges') }}">👥 Group Challenges</a>
+        </div>
+    </nav>
 
-<div class="container">
+<div class="group-info">
     <h2>👥 {{ group.name }}</h2>
     <h3>Members</h3>
     <ul>

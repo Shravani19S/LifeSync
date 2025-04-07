@@ -1,0 +1,21 @@
+body {
+    font-family: 'Verdana', sans-serif;
+    background: #f9f9f9;
+    padding: 40px;
+    text-align: center;
+    color: #333;
+}
+
+h1 {
+    color: #5e35b1;
+    margin-bottom: 20px;
+}
+
+.group-info {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
