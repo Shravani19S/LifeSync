@@ -36,8 +36,13 @@ select, input[type="submit"] {
 }
 
 input[type="submit"] {
-    background-color: #2575fc;
+    background-color: #5e2a84;
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #6f2c91;
 }
